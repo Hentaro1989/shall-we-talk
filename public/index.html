@@ -6,7 +6,24 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>shall-we-talk</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
   </head>
+  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCVkIcGPuZCWsZPBl9GZCpDfnKZlt-izOw",
+      authDomain: "shall-we-talk-xoxo.firebaseapp.com",
+      databaseURL: "https://shall-we-talk-xoxo.firebaseio.com",
+      projectId: "shall-we-talk-xoxo",
+      storageBucket: "shall-we-talk-xoxo.appspot.com",
+      messagingSenderId: "175440751841"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
   <body>
     <noscript>
       <strong>We're sorry but shall-we-talk doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>

@@ -1,31 +1,55 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app dark>
+    <v-toolbar app>
+      <v-toolbar-title class="headline text-uppercase">
+        <span>Shall We Talk</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn
+        flat
+        v-if="currentUser"
+        @click="logout"
+      >
+        <span class="mr-2">logout</span>
+      </v-btn>
+    </v-toolbar>
+
+    <v-content>
+      <router-view></router-view>
+    </v-content>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<script>
+/* global firebase */
+export default {
+  name: 'App',
+  components: {
+  },
+  beforeCreate() {
+    this.$router.afterEach(() => {
+      if (!firebase.auth().currentUser) {
+        this.$router.replace('/');
+      }
+    });
+    firebase.auth().onAuthStateChanged((user) => {
+      this.currentUser = user;
+      if (user) {
+        // do nothing.
+      } else {
+        this.$router.replace('/');
+      }
+    });
+  },
+  data() {
+    return {
+      currentUser: null,
+    };
+  },
+  methods: {
+    async logout() {
+      await firebase.auth().signOut().catch(error => console.log(error));
+    },
+  },
+};
+</script>
